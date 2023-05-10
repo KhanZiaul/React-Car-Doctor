@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Service from "./Service";
 import { FcOvertime } from "react-icons/fc";
+import { FiPhoneCall } from "react-icons/fi";
+import { SlLocationPin } from "react-icons/sl";
 
 const Services = () => {
 
@@ -28,7 +30,7 @@ const Services = () => {
 
             <button className='px-5 py-3 border-2 rounded-md border-orange-500 text-orange-600 hover:bg-orange-700 hover:text-white mx-auto block'>More Services</button>
 
-            <div className="my-8 text-white bg-black flex justify-between p-16 rounded-md">
+            <div className="my-8 text-white bg-black flex justify-between flex-col lg:flex-row gap-6 p-16 rounded-md">
                 <div className="flex items-center gap-3">
                     <FcOvertime className="h-12 w-12 text-red-500"/>
                     <div>
@@ -36,18 +38,18 @@ const Services = () => {
                         <p className="text-2xl font-semibold">7:00 am - 9:00 pm</p>
                     </div>
                 </div>
-                <div>
-                    <img src="" alt="" />
+                <div className="flex items-center gap-3">
+                <FiPhoneCall className="h-12 w-12 "/>
                     <div>
                         <p>Have a question?</p>
-                        <p className="text-3xl font-semibold">+2546 251 2658</p>
+                        <p className="text-2xl font-semibold">+2546 251 2658</p>
                     </div>
                 </div>
-                <div>
-                    <img src="" alt="" />
+                <div className="flex items-center gap-3">
+                <SlLocationPin className="h-12 w-12 text-red-400"/>
                     <div>
                         <p>Need a repair? our address</p>
-                        <p className="text-3xl font-semibold">Liza Street, New York</p>
+                        <p className="text-2xl font-semibold">Liza Street, New York</p>
                     </div>
                 </div>
             </div>
