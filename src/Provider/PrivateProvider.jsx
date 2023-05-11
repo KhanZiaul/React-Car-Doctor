@@ -13,7 +13,7 @@ const PrivateProvider = ({children}) => {
         return children ;
     }
 
-    <Navigate to='/login'></Navigate>
+    return <Navigate to='/login'></Navigate>
 };
 
 export default PrivateProvider;

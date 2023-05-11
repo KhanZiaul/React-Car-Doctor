@@ -1,6 +1,17 @@
-import checkout from '../../assets/images/checkout/checkout.png'
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const CartDetails = () => {
+
+    const {user} = useContext(AuthContext)
+
+    const [checkout,setCheckout] = useState([])
+    useEffect(()=>{
+        fetch(`http://localhost:3000/checkout?email=${user?.email}`)
+        .then(res => res.json())
+        .then(data => console.log(data))
+    },[user])
+
     return (
         <div>
             <div className='my-6 relative'>
@@ -11,7 +22,9 @@ const CartDetails = () => {
             </div>
 
             <div>
-                
+                {
+
+                }
             </div>
 
         </div>
