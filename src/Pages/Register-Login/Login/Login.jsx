@@ -9,14 +9,24 @@ import { useContext } from 'react';
 
 const Login = () => {
 
-    const { signPopup } = useContext(AuthContext)
+    const { signPopup, signInUser } = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider()
+
     function formHandler(event) {
+        
         event.preventDefault()
-        const Name = event.target.name.value;
         const Email = event.target.email.value;
         const Password = event.target.password.value;
-        console.log(Name, Email, Password)
+        console.log( Email, Password)
+
+        signInUser(Email, Password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user)
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+            });
 
         event.target.reset()
     }
