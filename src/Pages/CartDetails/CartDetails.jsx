@@ -9,6 +9,11 @@ const CartDetails = () => {
                     <h2 className='text-5xl h-full font-semibold flex ml-10 items-center'>Cart Details</h2>
                 </div>
             </div>
+
+            <div>
+                
+            </div>
+
         </div>
     );
 };

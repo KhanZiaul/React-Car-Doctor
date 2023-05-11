@@ -6,11 +6,29 @@ import checkout from '../../assets/images/checkout/checkout.png'
 const Checkout = () => {
     const booking = useLoaderData()
     const { user } = useContext(AuthContext)
-    const { price } = booking;
+    const { price , img} = booking;
 
     function formHandler(event) {
         event.preventDefault()
-
+        const date = event.target.date.value;
+        const chekoutInfo ={
+            email:user?.email,
+            clientName : user?.displayName,
+            img,
+            date,
+            price
+        }
+        fetch(`http://localhost:3000/checkout`,{
+            method:'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(chekoutInfo)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
     }
 
     return (

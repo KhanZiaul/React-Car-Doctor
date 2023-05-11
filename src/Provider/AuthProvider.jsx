@@ -8,16 +8,20 @@ export const AuthContext = createContext(null)
 const AuthProvider = ({ children }) => {
     const auth = getAuth(app);
     const [user, setUser] = useState(null)
+    const[loading,setLoading] = useState(true)
 
     function createUser(email, password) {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     function signInUser(email, password) {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    function signPopup(provider) {
+    function signPopup(provider){
+        setLoading(true)
         return signInWithPopup(auth, provider)
     }
 
@@ -37,7 +41,8 @@ const AuthProvider = ({ children }) => {
         user,
         createUser,
         signInUser,
-        signPopup
+        signPopup,
+        loading
     }
 
     return (
