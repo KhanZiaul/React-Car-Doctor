@@ -1,15 +1,14 @@
-import React from 'react';
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const Carts = ({checkout}) => {
-
-    const {img} = checkout
+    const {img , title , date , price} = checkout
     return (
                 <tbody>
 
                     <tr>
                         <th>
                             <label>
-                                <input type="checkbox" className="checkbox" />
+                                <AiFillCloseCircle className="w-8 h-8"/>
                             </label>
                         </th>
                         <td>
@@ -20,19 +19,19 @@ const Carts = ({checkout}) => {
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="font-bold">Hart Hagerty</div>
-                                    <div className="text-sm opacity-50">United States</div>
+                                    <div className="font-bold">{title}</div>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            Zemlak, Daniel and Leannon
+                            {title}
                             <br />
                             <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
                         </td>
-                        <td>Purple</td>
+                        <td className='font-bold'>{'$'+price}</td>
+                        <td className='font-bold'>{date}</td>
                         <th>
-                            <button className="btn btn-ghost btn-xs">details</button>
+                            <button className="btn bg-orange-500 btn-xs text-white">Pending</button>
                         </th>
                     </tr>
                 </tbody>

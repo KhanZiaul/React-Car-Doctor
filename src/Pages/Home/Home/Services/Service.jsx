@@ -9,7 +9,7 @@ const Service = ({ service }) => {
             <p className='text-2xl font-bold'>{title}</p>
             <div className="flex justify-between">
                 <p className='text-xl font-semibold text-red-500'>Price : ${price}</p>
-                <Link to={`booking/${_id}`}>
+                <Link to={`order/${_id}`}>
                     <FiArrowRight className="cursor-pointer" />
                 </Link>
             </div>

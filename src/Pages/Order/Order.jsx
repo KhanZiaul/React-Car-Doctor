@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
-import checkout from '../../assets/images/checkout/checkout.png'
+import OrderBanner from '../../assets/images/checkout/checkout.png'
 
-const Checkout = () => {
+const Order = () => {
     const booking = useLoaderData()
     const { user } = useContext(AuthContext)
-    const { price , img} = booking;
+    const { price , title ,  img} = booking;
 
     function formHandler(event) {
         event.preventDefault()
@@ -16,7 +16,8 @@ const Checkout = () => {
             clientName : user?.displayName,
             img,
             date,
-            price
+            price,
+            title
         }
         fetch(`http://localhost:3000/checkout`,{
             method:'POST',
@@ -34,7 +35,7 @@ const Checkout = () => {
     return (
         <div>
             <div className='my-6 relative'>
-                <img className='w-full' src={checkout} alt="" />
+                <img className='w-full' src={OrderBanner} alt="" />
                 <div className='absolute top-0 left-0 text-white bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] h-full w-full rounded-md'>
                     <h2 className='text-5xl h-full font-semibold flex ml-10 items-center'>Check Out</h2>
                 </div>
@@ -73,4 +74,4 @@ const Checkout = () => {
     );
 };
 
-export default Checkout;
+export default Order;

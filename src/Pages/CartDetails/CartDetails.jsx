@@ -28,14 +28,11 @@ const CartDetails = () => {
                     {/* head */}
                     <thead>
                         <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
+                            <th>Delete</th>
                             <th>Name</th>
                             <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Price</th>
+                            <th>Date</th>
                             <th></th>
                         </tr>
                     </thead>
