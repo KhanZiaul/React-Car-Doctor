@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
-import Carts from '../Carts/Carts';
+import CartsDetails from '../CartsDetails/CartsDetails';
 import cover from '../../assets/images/checkout/checkout.png'
 
-const CartDetails = () => {
+const CheckOut = () => {
 
     const { user } = useContext(AuthContext)
 
@@ -30,7 +30,7 @@ const CartDetails = () => {
                         <tr>
                             <th>Delete</th>
                             <th>Name</th>
-                            <th>Job</th>
+                            <th>Title</th>
                             <th>Price</th>
                             <th>Date</th>
                             <th></th>
@@ -38,7 +38,7 @@ const CartDetails = () => {
                     </thead>
 
                     {
-                        checkouts?.map(checkout => <Carts key={checkout._id} checkout={checkout}></Carts>)
+                        checkouts?.map(checkout => <CartsDetails key={checkout._id} checkout={checkout}></CartsDetails>)
                     }
 
                 </table>
@@ -47,4 +47,4 @@ const CartDetails = () => {
     );
 };
 
-export default CartDetails;
+export default CheckOut;

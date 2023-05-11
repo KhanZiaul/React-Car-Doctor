@@ -5,7 +5,7 @@ import Login from "../Pages/Register-Login/Login/Login";
 import Register from "../Pages/Register-Login/Register/Register";
 import Error from "../Pages/Shared/Error/Error";
 import PrivateProvider from "../Provider/PrivateProvider";
-import CartDetails from "../Pages/CartDetails/CartDetails";
+import CheckOut from "../Pages/CheckOut/CheckOut";
 import Order from "../Pages/Order/Order";
 
 const router = createBrowserRouter([
@@ -32,8 +32,8 @@ const router = createBrowserRouter([
                 loader:({params})=> fetch(`http://localhost:3000/services/${params.id}`)
             },
             {
-                path:"cart",
-                element:<CartDetails></CartDetails>
+                path:"checkout",
+                element:<CheckOut></CheckOut>
             }
         ]
     },
