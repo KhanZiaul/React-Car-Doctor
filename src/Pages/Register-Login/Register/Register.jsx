@@ -4,6 +4,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../../Provider/AuthProvider';
+import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
 
@@ -19,6 +20,8 @@ const Register = () => {
         createUser(Email, Password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                userUpdate(userCredential.user,Name)
+                console.log(user)
             })
             .catch((error) => {
                 const errorMessage = error.message;
@@ -27,6 +30,16 @@ const Register = () => {
         event.target.reset()
     }
 
+    function userUpdate(user,name) {
+
+        updateProfile(user, {
+            displayName:name
+        }).then(() => {
+  
+        }).catch((error) => {
+
+        });
+    }
 
     return (
         <div className="hero min-h-screen bg-base-200">
