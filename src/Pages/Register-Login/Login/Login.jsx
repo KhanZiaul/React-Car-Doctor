@@ -2,9 +2,34 @@ import loginImg from '../../../assets/images/login/login.svg'
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { GoogleAuthProvider } from 'firebase/auth';
+import { AuthContext } from '../../../Provider/AuthProvider';
+import { useContext } from 'react';
 
 
 const Login = () => {
+
+    const { signPopup } = useContext(AuthContext)
+    const googleProvider = new GoogleAuthProvider()
+    function formHandler(event) {
+        event.preventDefault()
+        const Name = event.target.name.value;
+        const Email = event.target.email.value;
+        const Password = event.target.password.value;
+        console.log(Name, Email, Password)
+
+        event.target.reset()
+    }
+
+    function googleHandler() {
+        signPopup(googleProvider)
+            .then((result) => {
+                const user = result.user;
+            }).catch((error) => {
+                const errorMessage = error.message;
+            });
+    }
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content gap-20 flex-col lg:flex-row">
@@ -15,7 +40,7 @@ const Login = () => {
 
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <h1 className="text-3xl text-center mt-4 font-semibold">Login</h1>
-                    <div className="card-body">
+                    <form onSubmit={formHandler} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -34,13 +59,20 @@ const Login = () => {
                         <div className="form-control mt-6">
                             <button className="btn bg-orange-700 text-white">sign in</button>
                             <p className='text-center text-[#737373] my-4'>Or Sign In with</p>
-                            <div className='flex justify-center gap-5'>
-                                <FcGoogle />
-                                <FaFacebook />
+                            <div className='flex flex-col gap-5'>
+                                <div onClick={googleHandler} className='border-2 rounded-xl flex p-3 items-center gap-3 bg-orange-700 hover:bg-orange-900 text-white cursor-pointer'>
+                                    <FcGoogle />
+                                    <span>Sign in with Google</span>
+                                </div>
+                                <div className='border-2 rounded-xl flex p-3 items-center gap-3 bg-orange-700 hover:bg-orange-900 text-white cursor-pointer'>
+                                    <FaFacebook />
+                                    <span>Sign in with Facebook</span>
+                                </div>
                             </div>
+
                             <p className='text-center text-[#737373] my-4'>New to car doctor ? <Link to='/register' className='font-bold text-orange-500 underline hover:text-orange-700 '>sign up</Link></p>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
