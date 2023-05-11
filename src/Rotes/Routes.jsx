@@ -6,6 +6,7 @@ import Register from "../Pages/Register-Login/Register/Register";
 import Error from "../Pages/Shared/Error/Error";
 import Checkout from "../Pages/Checkout/Checkout";
 import CartDetails from "../Pages/CartDetails/CartDetails";
+import PrivateProvider from "../Provider/PrivateProvider";
 
 const router = createBrowserRouter([
     {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
             },
             {
                 path:"booking/:id",
-                element:<Checkout></Checkout>,
+                element:<PrivateProvider><Checkout></Checkout></PrivateProvider>,
                 loader:({params})=> fetch(`http://localhost:3000/services/${params.id}`)
             },
             {

@@ -1,8 +1,12 @@
 import logo from '../../../assets/logo.svg'
 import { Link } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
+import { useContext } from 'react';
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 const Nav = () => {
+    const { user } = useContext(AuthContext)
+
     return (
         <div className="navbar bg-base-100 h-28 my-6">
             <div className="navbar-start">
@@ -14,8 +18,21 @@ const Nav = () => {
                         <li><Link>Home</Link></li>
                         <li><Link>About</Link></li>
                         <li><Link>Services</Link></li>
-                        <li><Link>Blog</Link></li>
-                        <li><Link>Contact</Link></li>
+                        <li>
+                            {
+                                user ? <div className='flex items-center flex-col'>
+                                    <span>
+                                        {
+                                            user?.email
+                                        }
+                                    </span>
+                                    <button className='px-5 py-3 border-2 rounded-md border-orange-500 text-orange-600 hover:bg-orange-700 hover:text-white mx-auto block'>Logout</button>
+                                </div>
+                                    :
+                                    <Link to='/login'><button className='px-5 py-3 border-2 rounded-md border-orange-500 text-orange-600 hover:bg-orange-700 hover:text-white mx-auto block'>Login</button></Link>
+                            }
+                        </li>
+
                     </ul>
                 </div>
                 <img src={logo} alt="" />
@@ -25,8 +42,20 @@ const Nav = () => {
                     <li><Link>Home</Link></li>
                     <li><Link>About</Link></li>
                     <li><Link>Services</Link></li>
-                    <li><Link>Blog</Link></li>
-                    <li><Link>Contact</Link></li>
+                    <li>
+                        {
+                            user ? <div className='flex items-center'>
+                                <span>
+                                    {
+                                        user?.email
+                                    }
+                                </span>
+                                <button className='px-5 py-3 border-2 rounded-md border-orange-500 text-orange-600 hover:bg-orange-700 hover:text-white mx-auto block'>Logout</button>
+                            </div>
+                                :
+                                <Link to='/login'><button className='px-5 py-3 border-2 rounded-md border-orange-500 text-orange-600 hover:bg-orange-700 hover:text-white mx-auto block'>Login</button></Link>
+                        }
+                    </li>
                 </ul>
             </div>
             <div className="navbar-end items-center lg:gap-6">
