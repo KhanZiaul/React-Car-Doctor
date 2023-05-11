@@ -4,12 +4,12 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { AuthContext } from '../../../Provider/AuthProvider';
-import { updateProfile } from 'firebase/auth';
+import { GoogleAuthProvider, updateProfile } from 'firebase/auth';
 
 const Register = () => {
 
-    const { createUser } = useContext(AuthContext)
-
+    const { createUser, signPopup } = useContext(AuthContext)
+    const googleProvider = new GoogleAuthProvider()
     function formHandler(event) {
         event.preventDefault()
         const Name = event.target.name.value;
@@ -20,7 +20,7 @@ const Register = () => {
         createUser(Email, Password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                userUpdate(userCredential.user,Name)
+                userUpdate(userCredential.user, Name)
                 console.log(user)
             })
             .catch((error) => {
@@ -30,16 +30,26 @@ const Register = () => {
         event.target.reset()
     }
 
-    function userUpdate(user,name) {
+    function userUpdate(user, name) {
 
         updateProfile(user, {
-            displayName:name
+            displayName: name
         }).then(() => {
-  
+
         }).catch((error) => {
 
         });
     }
+
+    function googleHandler() {
+        signPopup(googleProvider)
+            .then((result) => {
+                const user = result.user;
+            }).catch((error) => {
+                const errorMessage = error.message;
+            });
+    }
+
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -75,9 +85,16 @@ const Register = () => {
                         <div className="form-control mt-6">
                             <button className="btn bg-orange-700 text-white">sign up</button>
                             <p className='text-center text-[#737373] my-4'>Or Sign Up with</p>
-                            <div className='flex justify-center gap-5'>
-                                <FcGoogle />
-                                <FaFacebook />
+                            <div className='flex flex-col gap-5'>
+                                <div onClick={googleHandler} className='border-2 rounded-xl flex p-3 items-center gap-3 bg-orange-700 hover:bg-orange-900 text-white cursor-pointer'>
+                                    <FcGoogle />
+                                    <span>Sign in with Google</span>
+                                </div>
+                                <div className='border-2 rounded-xl flex p-3 items-center gap-3 bg-orange-700 hover:bg-orange-900 text-white cursor-pointer'>
+                                    <FaFacebook />
+                                    <span>Sign in with Facebook</span>
+                                </div>
+
                             </div>
                             <p className='text-center text-[#737373] my-4'>Already have an account ? <Link to='/login' className='font-bold text-orange-500 underline hover:text-orange-700 '>Login</Link></p>
                         </div>
