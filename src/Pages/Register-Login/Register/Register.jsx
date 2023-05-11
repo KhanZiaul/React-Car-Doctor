@@ -4,6 +4,18 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+
+    function formHandler(event){
+        event.preventDefault()
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        console.log(name,email,password)
+        
+        event.target.reset()
+    }
+
+
     return (
         <div className="hero min-h-screen bg-base-200">
         <div className="hero-content gap-20 flex-col lg:flex-row">
@@ -14,7 +26,7 @@ const Register = () => {
 
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                 <h1 className="text-3xl text-center mt-4 font-semibold">Sign Up</h1>
-                <div className="card-body">
+                <form onSubmit={formHandler} className="card-body">
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Name</span>
@@ -44,7 +56,7 @@ const Register = () => {
                         </div>
                         <p className='text-center text-[#737373] my-4'>Already have an account ? <Link to='/login' className='font-bold text-orange-500 underline hover:text-orange-700 '>Login</Link></p>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
