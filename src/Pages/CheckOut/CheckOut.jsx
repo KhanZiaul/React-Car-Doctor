@@ -6,13 +6,15 @@ import cover from '../../assets/images/checkout/checkout.png'
 const CheckOut = () => {
 
     const { user } = useContext(AuthContext)
-
+    
     const [checkouts, setCheckouts] = useState([])
     useEffect(() => {
         fetch(`http://localhost:3000/checkout?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setCheckouts(data))
     }, [user, checkouts])
+
+
 
     return (
         <div>

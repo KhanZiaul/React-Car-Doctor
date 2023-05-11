@@ -1,24 +1,34 @@
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const Carts = ({ checkout }) => {
-    const { img, title, date, price } = checkout
+    const { _id, img, title, date, price } = checkout;
+
+    function deleteHandler(id) {
+        fetch(`http://localhost:3000/checkout/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+
     return (
         <tbody>
-
             <tr>
                 <th>
                     <label>
-                        <AiFillCloseCircle className="w-8 h-8" />
+                        <AiFillCloseCircle onClick={() => deleteHandler(_id)} className="w-8 h-8 cursor-pointer" />
                     </label>
                 </th>
                 <td>
                     <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
+                        <div className="mask mask-squircle w-20 h-20">
                             <img src={img} alt="Avatar Tailwind CSS Component" />
                         </div>
                     </div>
                 </td>
-                <td>{title}</td>
+                <td className='font-bold'>{title}</td>
                 <td className='font-bold'>{'$' + price}</td>
                 <td className='font-bold'>{date}</td>
                 <th>
