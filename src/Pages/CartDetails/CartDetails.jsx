@@ -1,32 +1,51 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
+import Carts from '../Carts/Carts';
+import cover from '../../assets/images/checkout/checkout.png'
 
 const CartDetails = () => {
 
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
-    const [checkout,setCheckout] = useState([])
-    useEffect(()=>{
+    const [checkouts, setCheckouts] = useState([])
+    useEffect(() => {
         fetch(`http://localhost:3000/checkout?email=${user?.email}`)
-        .then(res => res.json())
-        .then(data => console.log(data))
-    },[user])
+            .then(res => res.json())
+            .then(data => setCheckouts(data))
+    }, [user, checkouts])
 
     return (
         <div>
             <div className='my-6 relative'>
-                <img className='w-full' src={checkout} alt="" />
+                <img className='w-full' src={cover} alt="" />
                 <div className='absolute top-0 left-0 text-white bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] h-full w-full rounded-md'>
                     <h2 className='text-5xl h-full font-semibold flex ml-10 items-center'>Cart Details</h2>
                 </div>
             </div>
 
-            <div>
-                {
+            <div className="overflow-x-auto w-full">
+                <table className="table w-full">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th>
+                                <label>
+                                    <input type="checkbox" className="checkbox" />
+                                </label>
+                            </th>
+                            <th>Name</th>
+                            <th>Job</th>
+                            <th>Favorite Color</th>
+                            <th></th>
+                        </tr>
+                    </thead>
 
-                }
+                    {
+                        checkouts?.map(checkout => <Carts key={checkout._id} checkout={checkout}></Carts>)
+                    }
+
+                </table>
             </div>
-
         </div>
     );
 };

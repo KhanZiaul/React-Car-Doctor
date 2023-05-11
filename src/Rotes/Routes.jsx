@@ -5,8 +5,8 @@ import Login from "../Pages/Register-Login/Login/Login";
 import Register from "../Pages/Register-Login/Register/Register";
 import Error from "../Pages/Shared/Error/Error";
 import Checkout from "../Pages/Checkout/Checkout";
-import CartDetails from "../Pages/CartDetails/CartDetails";
 import PrivateProvider from "../Provider/PrivateProvider";
+import CartDetails from "../Pages/CartDetails/CartDetails";
 
 const router = createBrowserRouter([
     {
