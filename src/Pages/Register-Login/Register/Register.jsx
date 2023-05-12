@@ -15,13 +15,11 @@ const Register = () => {
         const Name = event.target.name.value;
         const Email = event.target.email.value;
         const Password = event.target.password.value;
-        console.log(Name, Email, Password)
 
         createUser(Email, Password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 userUpdate(userCredential.user, Name)
-                console.log(user)
             })
             .catch((error) => {
                 const errorMessage = error.message;

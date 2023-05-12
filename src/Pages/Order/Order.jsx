@@ -1,12 +1,16 @@
 import { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import OrderBanner from '../../assets/images/checkout/checkout.png'
+import useScroll from '../../useScroll/useScroll';
 
 const Order = () => {
     const booking = useLoaderData()
     const { user } = useContext(AuthContext)
     const { price , title ,  img} = booking;
+
+    const {pathname} = useLocation()
+    useScroll(pathname)
 
     function formHandler(event) {
         event.preventDefault()
@@ -37,7 +41,7 @@ const Order = () => {
             <div className='my-6 relative'>
                 <img className='w-full' src={OrderBanner} alt="" />
                 <div className='absolute top-0 left-0 text-white bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] h-full w-full rounded-md'>
-                    <h2 className='text-5xl h-full font-semibold flex ml-10 items-center'>Check Out</h2>
+                    <h2 className='text-5xl h-full font-semibold flex ml-10 items-center'>Order Now</h2>
                 </div>
             </div>
 

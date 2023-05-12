@@ -17,12 +17,9 @@ const Login = () => {
         event.preventDefault()
         const Email = event.target.email.value;
         const Password = event.target.password.value;
-        console.log( Email, Password)
-
         signInUser(Email, Password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user)
             })
             .catch((error) => {
                 const errorMessage = error.message;
