@@ -14,8 +14,6 @@ const CheckOut = () => {
             .then(data => setCheckouts(data))
     }, [user, checkouts])
 
-
-
     return (
         <div>
             <div className='my-6 relative'>
