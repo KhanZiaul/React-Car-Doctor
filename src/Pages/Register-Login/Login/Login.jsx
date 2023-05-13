@@ -1,7 +1,7 @@
 import loginImg from '../../../assets/images/login/login.svg'
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { useContext } from 'react';
@@ -11,6 +11,10 @@ const Login = () => {
 
     const { signPopup, signInUser } = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider()
+    const location=useLocation();
+    console.log(location)
+    const navigate = useNavigate();
+    const from = location?.state?.from?.pathname || '/'
 
     function formHandler(event) {
         
@@ -20,6 +24,7 @@ const Login = () => {
         signInUser(Email, Password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                navigate(from , { replace: true })
             })
             .catch((error) => {
                 const errorMessage = error.message;
@@ -32,6 +37,7 @@ const Login = () => {
         signPopup(googleProvider)
             .then((result) => {
                 const user = result.user;
+                navigate(from , { replace: true })
             }).catch((error) => {
                 const errorMessage = error.message;
             });

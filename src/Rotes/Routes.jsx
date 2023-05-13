@@ -5,8 +5,8 @@ import Login from "../Pages/Register-Login/Login/Login";
 import Register from "../Pages/Register-Login/Register/Register";
 import Error from "../Pages/Shared/Error/Error";
 import PrivateProvider from "../Provider/PrivateProvider";
-import CheckOut from "../Pages/CheckOut/CheckOut";
 import Order from "../Pages/Order/Order";
+import CheckOut from "../Pages/Checkout/Checkout";
 
 const router = createBrowserRouter([
     {
