@@ -6,18 +6,26 @@ import cover from '../../assets/images/checkout/checkout.png'
 const CheckOut = () => {
 
     const { user } = useContext(AuthContext)
+    console.log(user)
 
     const [checkouts, setCheckouts] = useState([])
+
     useEffect(() => {
-        fetch(`https://react-car-doctor.vercel.app/checkout?email=${user?.email}`, {
-            method: 'GET',
-            headers: {
-                'authorization': `Bearer ${localStorage.getItem('user-login-token')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => setCheckouts(data))
-    }, [user])
+        if (user?.email) {
+
+            fetch(`https://react-car-doctor.vercel.app/checkout?email=${user?.email}`, {
+                method: 'GET',
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('user-login-token')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data =>{
+                    console.log(data)
+                    setCheckouts(data)
+                })
+        }
+    }, [user.email])
 
     function checkoutHandler(id) {
         fetch(`https://react-car-doctor.vercel.app/checkout/${id}`, {
@@ -34,7 +42,7 @@ const CheckOut = () => {
                 const checkOutId = checkouts?.find(co => co._id === id)
                 checkOutId.status = 'confirm'
 
-                const confimCheckout =[checkOutId,...remaining]
+                const confimCheckout = [checkOutId, ...remaining]
                 setCheckouts(confimCheckout)
             })
     }
@@ -77,7 +85,7 @@ const CheckOut = () => {
                     </thead>
 
                     {
-                        checkouts?.map(checkout => <CartsDetails key={checkout._id} checkout={checkout} deleteHandler={deleteHandler} checkoutHandler={checkoutHandler}></CartsDetails>)
+                        checkouts && checkouts.map(checkout => <CartsDetails key={checkout._id} checkout={checkout} deleteHandler={deleteHandler} checkoutHandler={checkoutHandler}></CartsDetails>)
                     }
 
                 </table>

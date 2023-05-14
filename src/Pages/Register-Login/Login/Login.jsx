@@ -36,10 +36,10 @@ const Login = () => {
                 })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
                     localStorage.setItem('user-login-token',data.token)
                     navigate(from , { replace: true })
                 })
+
             })
             .catch((error) => {
                 const errorMessage = error.message;

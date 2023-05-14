@@ -20,6 +20,23 @@ const Register = () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 userUpdate(userCredential.user, Name)
+                const loggedUser = {
+                    email : user.email
+                }
+
+                fetch('https://react-car-doctor.vercel.app/jwt',{
+                    method:'POST',
+                    headers:{
+                        'content-type' : 'application/json'
+                    },
+                    body:JSON.stringify(loggedUser)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    localStorage.setItem('user-login-token',data.token)
+                })
+
+                
             })
             .catch((error) => {
                 const errorMessage = error.message;
