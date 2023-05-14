@@ -1,7 +1,6 @@
-import { space } from "postcss/lib/list";
 import { AiFillCloseCircle } from "react-icons/ai";
 
-const Carts = ({ checkout }) => {
+const Carts = ({ checkout, checkouts, setCheckouts }) => {
     const { _id, img, title, date, price, status } = checkout;
 
     function deleteHandler(id) {
@@ -11,6 +10,8 @@ const Carts = ({ checkout }) => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
+                const restId = checkouts?.filter(restId => restId._id !== id)
+                setCheckouts(restId)
             })
     }
 
@@ -25,6 +26,10 @@ const Carts = ({ checkout }) => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
+                const checkOutId = checkouts?.find(co => co._id === id)
+                checkOutId.status = 'confirm'
+                const otherId = checkouts?.filter(restId => restId._id !== id)
+                setCheckouts(checkOutId, ...otherId)
             })
     }
 
@@ -48,7 +53,7 @@ const Carts = ({ checkout }) => {
                 <td className='font-bold'>{date}</td>
                 <th>
                     {
-                        status === 'confirm' ? <span className="btn bg-green-600 btn-xs text-white">Confirm</span> : <button onClick={() => checkoutHandler(_id)} className="btn bg-orange-500 btn-xs text-white">Pending...</button>
+                        status === 'confirm' ? <span className="btn bg-green-600 btn-xs text-white">Confirm</span> : <button onClick={() => checkoutHandler(_id)} className="btn bg-orange-500 btn-xs text-white">Plz Confirm...</button>
                     }
 
                 </th>

@@ -9,10 +9,15 @@ const CheckOut = () => {
     
     const [checkouts, setCheckouts] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:3000/checkout?email=${user?.email}`)
+        fetch(`http://localhost:3000/checkout?email=${user?.email}`,{
+           method:'GET',
+           headers:{
+            'authorization' : `Bearer ${localStorage.getItem('user-login-token')}`
+           } 
+        })
             .then(res => res.json())
             .then(data => setCheckouts(data))
-    }, [user, checkouts])
+    }, [user])
 
     return (
         <div>
@@ -38,7 +43,7 @@ const CheckOut = () => {
                     </thead>
 
                     {
-                        checkouts?.map(checkout => <CartsDetails key={checkout._id} checkout={checkout}></CartsDetails>)
+                        checkouts?.map(checkout => <CartsDetails key={checkout._id} checkout={checkout} checkouts ={checkouts} setCheckouts={setCheckouts}></CartsDetails>)
                     }
 
                 </table>

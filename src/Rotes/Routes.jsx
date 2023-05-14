@@ -33,7 +33,7 @@ const router = createBrowserRouter([
             },
             {
                 path:"checkout",
-                element:<CheckOut></CheckOut>
+                element:<PrivateProvider><CheckOut></CheckOut></PrivateProvider> 
             }
         ]
     },
