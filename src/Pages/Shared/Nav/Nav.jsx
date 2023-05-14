@@ -10,6 +10,8 @@ const Nav = () => {
     function logOutHandler(){
         logOut().then(() => {
 
+            localStorage.removeItem('user-login-token')
+
         }).catch((error) => {
             
         });

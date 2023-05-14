@@ -12,7 +12,6 @@ const Login = () => {
     const { signPopup, signInUser } = useContext(AuthContext)
     const googleProvider = new GoogleAuthProvider()
     const location=useLocation();
-    console.log(location)
     const navigate = useNavigate();
     const from = location?.state?.from?.pathname || '/'
 
@@ -24,7 +23,6 @@ const Login = () => {
         signInUser(Email, Password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                navigate(from , { replace: true })
                 const loggedUser = {
                     email : user.email
                 }
@@ -39,7 +37,8 @@ const Login = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
-                    
+                    localStorage.setItem('user-login-token',data.token)
+                    navigate(from , { replace: true })
                 })
             })
             .catch((error) => {
