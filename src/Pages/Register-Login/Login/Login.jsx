@@ -25,6 +25,22 @@ const Login = () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 navigate(from , { replace: true })
+                const loggedUser = {
+                    email : user.email
+                }
+
+                fetch('http://localhost:3000/jwt',{
+                    method:'POST',
+                    headers:{
+                        'content-type' : 'application/json'
+                    },
+                    body:JSON.stringify(loggedUser)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    
+                })
             })
             .catch((error) => {
                 const errorMessage = error.message;
