@@ -23,7 +23,7 @@ const Order = () => {
             price,
             title
         }
-        fetch(`http://localhost:3000/checkout`,{
+        fetch(`https://react-car-doctor.vercel.app/checkout`,{
             method:'POST',
             headers:{
                 'content-type':'application/json'

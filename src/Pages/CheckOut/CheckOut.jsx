@@ -9,7 +9,7 @@ const CheckOut = () => {
 
     const [checkouts, setCheckouts] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:3000/checkout?email=${user?.email}`, {
+        fetch(`https://react-car-doctor.vercel.app/checkout?email=${user?.email}`, {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('user-login-token')}`
@@ -20,7 +20,7 @@ const CheckOut = () => {
     }, [user])
 
     function checkoutHandler(id) {
-        fetch(`http://localhost:3000/checkout/${id}`, {
+        fetch(`https://react-car-doctor.vercel.app/checkout/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -41,7 +41,7 @@ const CheckOut = () => {
 
 
     function deleteHandler(id) {
-        fetch(`http://localhost:3000/checkout/${id}`, {
+        fetch(`https://react-car-doctor.vercel.app/checkout/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
