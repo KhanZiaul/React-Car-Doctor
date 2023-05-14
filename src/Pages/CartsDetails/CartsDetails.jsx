@@ -1,37 +1,9 @@
 import { AiFillCloseCircle } from "react-icons/ai";
 
-const Carts = ({ checkout, checkouts, setCheckouts }) => {
+const Carts = ({ checkout,checkoutHandler, deleteHandler}) => {
     const { _id, img, title, date, price, status } = checkout;
 
-    function deleteHandler(id) {
-        fetch(`http://localhost:3000/checkout/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                const restId = checkouts?.filter(restId => restId._id !== id)
-                setCheckouts(restId)
-            })
-    }
 
-    function checkoutHandler(id) {
-        fetch(`http://localhost:3000/checkout/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({ status: 'confirm' })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                const checkOutId = checkouts?.find(co => co._id === id)
-                checkOutId.status = 'confirm'
-                const otherId = checkouts?.filter(restId => restId._id !== id)
-                setCheckouts(checkOutId, ...otherId)
-            })
-    }
 
     return (
         <tbody>

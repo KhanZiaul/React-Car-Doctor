@@ -6,18 +6,52 @@ import cover from '../../assets/images/checkout/checkout.png'
 const CheckOut = () => {
 
     const { user } = useContext(AuthContext)
-    
+
     const [checkouts, setCheckouts] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:3000/checkout?email=${user?.email}`,{
-           method:'GET',
-           headers:{
-            'authorization' : `Bearer ${localStorage.getItem('user-login-token')}`
-           } 
+        fetch(`http://localhost:3000/checkout?email=${user?.email}`, {
+            method: 'GET',
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('user-login-token')}`
+            }
         })
             .then(res => res.json())
             .then(data => setCheckouts(data))
     }, [user])
+
+    function checkoutHandler(id) {
+        fetch(`http://localhost:3000/checkout/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'confirm' })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                const remaining = checkouts?.filter(restId => restId._id !== id)
+                const checkOutId = checkouts?.find(co => co._id === id)
+                checkOutId.status = 'confirm'
+
+                const confimCheckout =[checkOutId,...remaining]
+                setCheckouts(confimCheckout)
+            })
+    }
+
+
+    function deleteHandler(id) {
+        fetch(`http://localhost:3000/checkout/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                const restId = checkouts?.filter(restId => restId._id !== id)
+                setCheckouts(restId)
+            })
+    }
+
 
     return (
         <div>
@@ -43,7 +77,7 @@ const CheckOut = () => {
                     </thead>
 
                     {
-                        checkouts?.map(checkout => <CartsDetails key={checkout._id} checkout={checkout} checkouts ={checkouts} setCheckouts={setCheckouts}></CartsDetails>)
+                        checkouts?.map(checkout => <CartsDetails key={checkout._id} checkout={checkout} deleteHandler={deleteHandler} checkoutHandler={checkoutHandler}></CartsDetails>)
                     }
 
                 </table>
