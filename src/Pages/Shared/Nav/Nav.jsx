@@ -25,7 +25,7 @@ const Nav = () => {
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link>Home</Link></li>
                         <li><Link>About</Link></li>
-                        <li><Link>Services</Link></li>
+                        <li><Link to='/checkout'>Checkout</Link></li>
                         <li>
                             {
                                 user ? <div className='flex items-center flex-col'>
@@ -49,7 +49,7 @@ const Nav = () => {
                 <ul className="menu menu-horizontal px-1">
                     <li><Link>Home</Link></li>
                     <li><Link>About</Link></li>
-                    <li><Link>Services</Link></li>
+                    <li><Link to='/checkout'>Checkout</Link></li>
                     <li>
                         {
                             user ? <div className='flex items-center'>
